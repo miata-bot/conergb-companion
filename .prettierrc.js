@@ -3,7 +3,7 @@ module.exports = {
   bracketSameLine: true,
   bracketSpacing: false,
   importOrder: [
-    '^react$|^react-native/?(.*)$',
+    '^react$|^react-native(/.*)?$',
     '<THIRD_PARTY_MODULES>',
     '^[./]',
   ],

@@ -11,8 +11,15 @@
     "prettier": "prettier --config \".prettierrc.js\" --ignore-path \".prettierignore\" -l  --write \"**/*.{json,md,scss,yaml,yml,js,jsx,tsx,ts}\""
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.11",
+    "native-base": "^3.4.13",
     "react": "18.0.0",
-    "react-native": "0.69.4"
+    "react-dom": "18.0.0",
+    "react-native": "0.69.4",
+    "react-native-ble-manager": "^8.4.3",
+    "react-native-safe-area-context": "^3.4.1",
+    "react-native-screens": "^3.15.0",
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
