@@ -10,5 +10,6 @@ module.exports = {
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
   singleQuote: true,
+  semi: false,
   trailingComma: 'all',
-};
+}

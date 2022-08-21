@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import {NavigationContainer} from '@react-navigation/native';
-import {NativeBaseProvider} from 'native-base';
+import {NavigationContainer} from '@react-navigation/native'
+import {NativeBaseProvider} from 'native-base'
 
-import BluetoothApp from './BluetoothApp';
+import BluetoothApp from './BluetoothApp'
 
 export default function App() {
   return (
@@ -12,5 +12,5 @@ export default function App() {
         <BluetoothApp />
       </NativeBaseProvider>
     </NavigationContainer>
-  );
+  )
 }
