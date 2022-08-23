@@ -1,4 +1,3 @@
-import {StackScreenProps} from '@react-navigation/stack'
 import {
   Box,
   Button,
@@ -9,16 +8,13 @@ import {
   VStack,
   useColorModeValue,
 } from 'native-base'
+import {openSettings} from 'react-native-permissions'
 
-import {OnboardingStackParamList} from '.'
-
-type Props = StackScreenProps<OnboardingStackParamList, 'ExplainPermissions'>
-
-export default function ExplainPermissionsScreen({navigation}: Props) {
+export default function BtErrorScreen() {
   const bgColor = useColorModeValue('light.50', 'dark.50')
 
-  function goToNextScreen() {
-    navigation.push('Scan')
+  async function handleOpenSettings() {
+    await openSettings()
   }
 
   return (
@@ -26,10 +22,10 @@ export default function ExplainPermissionsScreen({navigation}: Props) {
       <Flex height="100%" justifyContent="center">
         <VStack>
           <Box paddingX="8">
-            <Heading marginBottom="4">Enable Bluetooth</Heading>
+            <Heading marginBottom="4">Couldn't initialize Bluetooth</Heading>
             <Text>
-              Please provide access to your device's bluetooth, which is
-              required for connecting to the ConeRGB Controller.
+              You will not be able to control the ConeRGB Controller with this
+              device if you do not grant this app access to Bluetooth.
             </Text>
           </Box>
         </VStack>
@@ -37,10 +33,10 @@ export default function ExplainPermissionsScreen({navigation}: Props) {
       <Center marginBottom="8" marginTop="auto" paddingX="8" safeAreaBottom>
         <Button
           colorScheme="orange"
-          onPress={goToNextScreen}
+          onPress={handleOpenSettings}
           size="lg"
           width="100%">
-          Continue
+          Open Settings
         </Button>
       </Center>
     </Flex>

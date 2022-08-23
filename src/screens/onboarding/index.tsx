@@ -2,6 +2,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 
 import ExplainPermissionsScreen from './ExplainPermissionsScreen'
 import PowerOnControllerScreen from './PowerOnControllerScreen'
+import ScanScreen from './ScanScreen'
 
 export type OnboardingStackParamList = {
   BtError: undefined
@@ -23,6 +24,7 @@ export default function OnboardingScreen() {
         name="ExplainPermissions"
         component={ExplainPermissionsScreen}
       />
+      <OnboardingStack.Screen name="Scan" component={ScanScreen} />
     </OnboardingStack.Navigator>
   )
 }
