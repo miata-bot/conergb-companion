@@ -51,5 +51,7 @@
 	<false/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Allows the ConeRGB Companion app to connect to your RGB controller.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Allows the ConeRGB Companion app to connect to your RGB controller.</string>
 </dict>
 </plist>

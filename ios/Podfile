@@ -23,6 +23,10 @@ target 'ConeRGBCompanion' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # react-native-permissions
+  react_native_permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-BluetoothPeripheral', :path => "#{react_native_permissions_path}/BluetoothPeripheral"
+
   target 'ConeRGBCompanionTests' do
     inherit! :complete
     # Pods for testing

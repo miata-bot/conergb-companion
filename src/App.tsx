@@ -1,4 +1,10 @@
-import {NavigationContainer} from '@react-navigation/native'
+import {useColorScheme} from 'react-native'
+
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 
 import {ThemeProvider} from 'src/modules/theme'
@@ -19,8 +25,7 @@ function App() {
         headerShown: false,
       }}>
       <RootStack.Screen name="Controller" component={Controller} />
-      <RootStack.Group
-        screenOptions={{detachPreviousScreen: true, presentation: 'modal'}}>
+      <RootStack.Group screenOptions={{presentation: 'modal'}}>
         <RootStack.Screen name="Onboarding" component={OnboardingScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
@@ -28,8 +33,10 @@ function App() {
 }
 
 export default function AppRoot() {
+  const scheme = useColorScheme()
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <ThemeProvider>
         <App />
       </ThemeProvider>

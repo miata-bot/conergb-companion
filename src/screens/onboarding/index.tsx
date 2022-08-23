@@ -1,40 +1,28 @@
-import type {StackScreenProps} from '@react-navigation/stack'
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-  useColorModeValue,
-} from 'native-base'
+import {createStackNavigator} from '@react-navigation/stack'
 
-import type {RootStackParamList} from 'src/App'
+import ExplainPermissionsScreen from './ExplainPermissionsScreen'
+import PowerOnControllerScreen from './PowerOnControllerScreen'
 
-type Props = StackScreenProps<RootStackParamList, 'Onboarding'>
+export type OnboardingStackParamList = {
+  BtError: undefined
+  ExplainPermissions: undefined
+  PowerOnController: undefined
+  Scan: undefined
+}
 
-export default function OnboardingScreen({}: Props) {
-  const bgColor = useColorModeValue('light.50', 'dark.50')
+const OnboardingStack = createStackNavigator<OnboardingStackParamList>()
 
+export default function OnboardingScreen() {
   return (
-    <Flex bgColor={bgColor} flexDirection="column" height="100%">
-      <Flex h="100%" justifyContent="center">
-        <VStack>
-          <Box paddingX="8">
-            <Heading marginBottom="4">Power your ConeRGB Controller</Heading>
-            <Text>
-              Your controller should be on and in close proximity to this device
-              before you continue.
-            </Text>
-          </Box>
-        </VStack>
-      </Flex>
-      <Center marginBottom="8" marginTop="auto" paddingX="8">
-        <Button colorScheme="orange" size="lg" w="100%">
-          Continue
-        </Button>
-      </Center>
-    </Flex>
+    <OnboardingStack.Navigator screenOptions={{headerShown: false}}>
+      <OnboardingStack.Screen
+        name="PowerOnController"
+        component={PowerOnControllerScreen}
+      />
+      <OnboardingStack.Screen
+        name="ExplainPermissions"
+        component={ExplainPermissionsScreen}
+      />
+    </OnboardingStack.Navigator>
   )
 }
