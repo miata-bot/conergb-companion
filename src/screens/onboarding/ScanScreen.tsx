@@ -29,7 +29,6 @@ export default function ScanScreen({navigation}: Props) {
 
   useEffect(() => {
     async function requestBtPermissions() {
-      console.log('requesting BT')
       const result = await requestBtPermissionsFn()
       setBtPermStatus(result)
     }
@@ -44,13 +43,17 @@ export default function ScanScreen({navigation}: Props) {
       ) {
         navigation.replace('BtError')
       }
-      if (btPermStatus === RESULTS.GRANTED) {
-        console.log('granted')
-      }
     }
   }, [btPermStatus, navigation, requestBtPermissionsFn])
 
-  console.log('status', btPermStatus)
+  useEffect(() => {
+    if (
+      btPermStatus === RESULTS.GRANTED ||
+      btPermStatus === RESULTS.UNAVAILABLE
+    ) {
+      console.log('scan')
+    }
+  }, [btPermStatus])
 
   return (
     <Flex bgColor={bgColor} flexDirection="column" height="100%">
