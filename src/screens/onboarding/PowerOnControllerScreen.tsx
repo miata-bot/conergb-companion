@@ -38,7 +38,12 @@ export default function PowerOnControllerScreen({navigation}: Props) {
     ) {
       navigation.push('ExplainPermissions')
     }
-    return
+    if (btPermStatus === RESULTS.BLOCKED || btPermStatus === RESULTS.LIMITED) {
+      navigation.push('BtError')
+    }
+    if (btPermStatus === RESULTS.GRANTED) {
+      navigation.push('Scan')
+    }
   }
 
   return (

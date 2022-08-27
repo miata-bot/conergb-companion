@@ -1,15 +1,19 @@
 import {useState} from 'react'
 import {useEffect} from 'react'
 
+import {StackScreenProps} from '@react-navigation/stack'
 import {Center, Flex, Spinner, VStack, useColorModeValue} from 'native-base'
-import {type PermissionStatus} from 'react-native-permissions'
+import {type PermissionStatus, RESULTS} from 'react-native-permissions'
 
+import {OnboardingStackParamList} from '.'
 import {
   getCheckBtPermissionsFn,
   getRequestBtPermissionsFn,
 } from 'src/modules/bt'
 
-export default function ScanScreen() {
+type Props = StackScreenProps<OnboardingStackParamList, 'Scan'>
+
+export default function ScanScreen({navigation}: Props) {
   const [btPermStatus, setBtPermStatus] = useState<PermissionStatus>()
   const bgColor = useColorModeValue('light.50', 'dark.50')
   const checkBtPermissionsFn = getCheckBtPermissionsFn()
@@ -31,14 +35,20 @@ export default function ScanScreen() {
     }
 
     if (btPermStatus) {
-      if (btPermStatus === 'denied') {
+      if (btPermStatus === RESULTS.DENIED) {
         requestBtPermissions()
       }
-      if (btPermStatus === 'granted') {
+      if (
+        btPermStatus === RESULTS.BLOCKED ||
+        btPermStatus === RESULTS.LIMITED
+      ) {
+        navigation.replace('BtError')
+      }
+      if (btPermStatus === RESULTS.GRANTED) {
         console.log('granted')
       }
     }
-  }, [btPermStatus, requestBtPermissionsFn])
+  }, [btPermStatus, navigation, requestBtPermissionsFn])
 
   console.log('status', btPermStatus)
 
