@@ -1,16 +1,45 @@
-import React from 'react'
+import {useColorScheme} from 'react-native'
 
-import {NavigationContainer} from '@react-navigation/native'
-import {NativeBaseProvider} from 'native-base'
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
 
-import BluetoothApp from './BluetoothApp'
+import {ThemeProvider} from 'src/modules/theme'
+import Controller from 'src/screens/controller'
+import OnboardingScreen from 'src/screens/onboarding'
 
-export default function App() {
+export type RootStackParamList = {
+  Controller: undefined
+  Onboarding: undefined
+}
+
+const RootStack = createStackNavigator<RootStackParamList>()
+
+function App() {
   return (
-    <NavigationContainer>
-      <NativeBaseProvider>
-        <BluetoothApp />
-      </NativeBaseProvider>
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <RootStack.Screen name="Controller" component={Controller} />
+      <RootStack.Group screenOptions={{presentation: 'modal'}}>
+        <RootStack.Screen name="Onboarding" component={OnboardingScreen} />
+      </RootStack.Group>
+    </RootStack.Navigator>
+  )
+}
+
+export default function AppRoot() {
+  const scheme = useColorScheme()
+
+  return (
+    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </NavigationContainer>
   )
 }
