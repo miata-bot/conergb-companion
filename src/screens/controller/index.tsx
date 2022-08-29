@@ -1,5 +1,4 @@
 import {useEffect} from 'react'
-import {Text} from 'react-native'
 
 import type {StackScreenProps} from '@react-navigation/stack'
 import {Flex, useColorModeValue} from 'native-base'

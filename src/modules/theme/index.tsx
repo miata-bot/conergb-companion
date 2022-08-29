@@ -1,11 +1,7 @@
-import {useState} from 'react'
+import {PropsWithChildren, useState} from 'react'
 import {Appearance, type ColorSchemeName} from 'react-native'
 
 import {NativeBaseProvider, type StorageManager, extendTheme} from 'native-base'
-
-type Props = {
-  children?: React.ReactNode
-}
 
 const appTheme = extendTheme({
   config: {
@@ -32,7 +28,7 @@ const appTheme = extendTheme({
   },
 })
 
-export function ThemeProvider({children}: Props) {
+export function ThemeProvider({children}: PropsWithChildren) {
   const [systemColorScheme, setSystemColorScheme] = useState<ColorSchemeName>(
     Appearance.getColorScheme(),
   )

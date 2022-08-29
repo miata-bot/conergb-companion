@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 
+import {CompositeScreenProps} from '@react-navigation/native'
 import {type StackScreenProps} from '@react-navigation/stack'
 import {
   Box,
@@ -14,9 +15,13 @@ import {
 import {type PermissionStatus, RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
+import {RootStackParamList} from 'src/App'
 import {getCheckBtPermissionsFn} from 'src/modules/bt'
 
-type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
+type Props = CompositeScreenProps<
+  StackScreenProps<OnboardingStackParamList, 'PowerOnController'>,
+  StackScreenProps<RootStackParamList>
+>
 
 export default function PowerOnControllerScreen({navigation}: Props) {
   const bgColor = useColorModeValue('light.50', 'dark.50')

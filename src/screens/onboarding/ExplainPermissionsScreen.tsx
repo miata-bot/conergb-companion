@@ -1,3 +1,4 @@
+import {CompositeScreenProps} from '@react-navigation/native'
 import {StackScreenProps} from '@react-navigation/stack'
 import {
   Box,
@@ -11,8 +12,12 @@ import {
 } from 'native-base'
 
 import {OnboardingStackParamList} from '.'
+import {RootStackParamList} from 'src/App'
 
-type Props = StackScreenProps<OnboardingStackParamList, 'ExplainPermissions'>
+type Props = CompositeScreenProps<
+  StackScreenProps<OnboardingStackParamList, 'ExplainPermissions'>,
+  StackScreenProps<RootStackParamList>
+>
 
 export default function ExplainPermissionsScreen({navigation}: Props) {
   const bgColor = useColorModeValue('light.50', 'dark.50')
