@@ -83,10 +83,14 @@ export default function ScanScreen({navigation}: Props) {
         try {
           await BleManager.scan([], 3)
           // setReadyToScan(false)
-          BleManagerEmitter.addListener(
+          const discoverySubscription = BleManagerEmitter.addListener(
             BLE_MANAGER.DISCOVER_PERIPHERAL,
             discoverPeripheral,
           )
+
+          return () => {
+            discoverySubscription.remove()
+          }
         } catch (error) {
           console.log(error)
           navigation.replace('BtError')
