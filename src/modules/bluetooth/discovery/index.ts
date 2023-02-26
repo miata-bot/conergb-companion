@@ -1,1 +1,1 @@
-export {default as useBtListeners} from './hooks/useBtListeners'
+export {default as useDiscoverPeripherals} from './hooks/useDiscoverPeripherals'

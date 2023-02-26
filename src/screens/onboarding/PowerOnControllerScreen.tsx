@@ -1,15 +1,22 @@
 import {type StackScreenProps} from '@react-navigation/stack'
-import {Box, Button, Center, Flex, Heading, Text, VStack} from 'native-base'
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Text,
+  VStack,
+  View,
+} from 'native-base'
 import {RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
 import {useGetBtPerms} from '~/modules/bluetooth/permissions'
-import {useBgColor} from '~/modules/theme'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
 
 export default function PowerOnControllerScreen({navigation}: Props) {
-  const bgColor = useBgColor()
   const [btPermStatus] = useGetBtPerms()
 
   function goToNextScreen() {
@@ -28,7 +35,7 @@ export default function PowerOnControllerScreen({navigation}: Props) {
   }
 
   return (
-    <Flex bgColor={bgColor} flexDirection="column" height="100%">
+    <View>
       <Flex height="100%" justifyContent="center">
         <VStack>
           <Box paddingX="8">
@@ -41,14 +48,10 @@ export default function PowerOnControllerScreen({navigation}: Props) {
         </VStack>
       </Flex>
       <Center marginBottom="8" marginTop="auto" paddingX="8" safeAreaBottom>
-        <Button
-          colorScheme="orange"
-          onPress={goToNextScreen}
-          size="lg"
-          width="100%">
+        <Button onPress={goToNextScreen} size="lg" width="100%">
           Next
         </Button>
       </Center>
-    </Flex>
+    </View>
   )
 }

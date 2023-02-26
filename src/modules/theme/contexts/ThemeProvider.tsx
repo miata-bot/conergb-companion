@@ -3,7 +3,7 @@ import {Appearance, type ColorSchemeName} from 'react-native'
 
 import {NativeBaseProvider, type StorageManager} from 'native-base'
 
-import theme from './theme'
+import theme from '../theme'
 
 export default function ThemeProvider({children}: {children: React.ReactNode}) {
   const [systemColorScheme, setSystemColorScheme] = useState<ColorSchemeName>(
