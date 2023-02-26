@@ -9,7 +9,9 @@
         "src/*"
       ]
     },
-    /* Completeness */
-    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+    /* Override react-native tsconfig looking for Jest */
+    "types": [
+      "react-native",
+    ],
   }
 }
