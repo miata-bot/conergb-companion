@@ -12,5 +12,13 @@ module.exports = {
         runtime: 'automatic',
       },
     ],
+    [
+      'module-resolver',
+      {
+        alias: {
+          '~': './src',
+        },
+      },
+    ],
   ],
 }

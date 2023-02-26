@@ -1,10 +1,9 @@
 import {useEffect} from 'react'
-import {Text} from 'react-native'
 
 import type {StackScreenProps} from '@react-navigation/stack'
 import {Flex, useColorModeValue} from 'native-base'
 
-import type {RootStackParamList} from 'src/App'
+import type {RootStackParamList} from '~/App'
 
 type Props = StackScreenProps<RootStackParamList, 'Controller'>
 

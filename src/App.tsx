@@ -7,9 +7,9 @@ import {
 } from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 
-import {ThemeProvider} from 'src/modules/theme'
-import Controller from 'src/screens/controller'
-import OnboardingScreen from 'src/screens/onboarding'
+import {ThemeProvider} from '~/modules/theme'
+import Controller from '~/screens/controller'
+import OnboardingScreen from '~/screens/onboarding'
 
 export type RootStackParamList = {
   Controller: undefined

@@ -14,7 +14,7 @@ import {
 import {type PermissionStatus, RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
-import {getCheckBtPermissionsFn} from 'src/modules/bt'
+import {getCheckBtPermissionsFn} from '~/modules/bt'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
 

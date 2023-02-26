@@ -6,10 +6,7 @@ import {Center, Flex, Spinner, VStack, useColorModeValue} from 'native-base'
 import {type PermissionStatus, RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
-import {
-  getCheckBtPermissionsFn,
-  getRequestBtPermissionsFn,
-} from 'src/modules/bt'
+import {getCheckBtPermissionsFn, getRequestBtPermissionsFn} from '~/modules/bt'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'Scan'>
 
