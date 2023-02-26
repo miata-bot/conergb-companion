@@ -21,7 +21,9 @@ export default function BtErrorScreen() {
         <Flex height="100%" justifyContent="center">
           <VStack>
             <Box paddingX="8">
-              <Heading marginBottom="4">Couldn't initialize Bluetooth</Heading>
+              <Heading marginBottom="4">
+                Couldn&apos;t initialize Bluetooth
+              </Heading>
               <Text>
                 You will not be able to control the ConeRGB Controller with this
                 device if you do not grant this app access to Bluetooth.

@@ -1,38 +1,31 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect} from 'react'
 import {NativeEventEmitter, NativeModules} from 'react-native'
 
 import {type BleStopScanEvent, type Peripheral} from 'react-native-ble-manager'
 
+import {ScanningContext} from '../contexts/ScanningProvider'
+
 const BleManagerModule = NativeModules.BleManager
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule)
 
-interface DiscoveredPeripherals {
-  [key: Peripheral['id']]: Peripheral
-}
-
-interface UseDiscoverPeripheralsProps {
-  onDiscoveryStop?: (args?: BleStopScanEvent) => void
-}
-
-export default function useDiscoverPeripherals({
-  onDiscoveryStop,
-}: UseDiscoverPeripheralsProps = {}) {
-  const [peripherals, setPeripherals] = useState<DiscoveredPeripherals>({})
+export default function useDiscoverPeripherals() {
+  const {
+    peripheralsState: [, addPeripheral],
+    scanningState: [, setIsScanning],
+  } = useContext(ScanningContext)
 
   useEffect(() => {
     const listeners = [
       bleManagerEmitter.addListener(
         'BleManagerStopScan',
-        (args: BleStopScanEvent) => {
-          onDiscoveryStop?.(args)
+        (_args: BleStopScanEvent) => {
+          setIsScanning(false)
         },
       ),
       bleManagerEmitter.addListener(
         'BleManagerDiscoverPeripheral',
         (peripheral: Peripheral) => {
-          if (!peripherals[peripheral.id]) {
-            setPeripherals({...peripherals, [peripheral.id]: peripheral})
-          }
+          addPeripheral(peripheral)
         },
       ),
     ]
@@ -41,6 +34,4 @@ export default function useDiscoverPeripherals({
       for (const listener of listeners) listener.remove()
     }
   })
-
-  return {peripherals: Object.values(peripherals)}
 }

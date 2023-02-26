@@ -11,7 +11,7 @@ import {
 } from 'native-base'
 import {RESULTS} from 'react-native-permissions'
 
-import {OnboardingStackParamList} from '.'
+import {type OnboardingStackParamList} from '.'
 import {useGetBtPerms} from '~/modules/bluetooth/permissions'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
@@ -27,10 +27,10 @@ export default function PowerOnControllerScreen({navigation}: Props) {
       navigation.push('ExplainPermissions')
     }
     if (btPermStatus === RESULTS.BLOCKED || btPermStatus === RESULTS.LIMITED) {
-      navigation.push('BtError')
+      navigation.replace('BtError')
     }
     if (btPermStatus === RESULTS.GRANTED) {
-      navigation.push('Scan')
+      navigation.replace('Scan')
     }
   }
 
@@ -39,7 +39,7 @@ export default function PowerOnControllerScreen({navigation}: Props) {
       <Flex height="100%" justifyContent="center">
         <VStack>
           <Box paddingX="8">
-            <Heading marginBottom="4">Power your ConeRGB Controller</Heading>
+            <Heading marginBottom="4">Power your Cone RGB Controller</Heading>
             <Text>
               Your controller should be on and in close proximity to this device
               before you continue.

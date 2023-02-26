@@ -1,6 +1,13 @@
-import {extendTheme} from 'native-base'
+import {theme as BaseTheme, extendTheme} from 'native-base'
+
+export const AppColors = {
+  BG: {light: 'light.50', dark: 'dark.50'},
+}
 
 const theme = extendTheme({
+  colors: {
+    primary: BaseTheme.colors.orange,
+  },
   config: {
     useSystemColorMode: true,
   },
@@ -10,7 +17,7 @@ const theme = extendTheme({
         borderRadius: 'md',
       },
       defaultProps: {
-        colorScheme: 'orange',
+        colorScheme: 'primary',
       },
       sizes: {
         lg: {
@@ -36,8 +43,8 @@ const theme = extendTheme({
           height: '100%',
         }
         return {
-          _light: {...baseStyles, backgroundColor: 'light.50'},
-          _dark: {...baseStyles, backgroundColor: 'dark.50'},
+          _light: {...baseStyles, backgroundColor: AppColors.BG.light},
+          _dark: {...baseStyles, backgroundColor: AppColors.BG.dark},
         }
       },
     },

@@ -6,6 +6,7 @@ import {
   NavigationContainer,
 } from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
+import {View} from 'native-base'
 
 import {useBtService} from './modules/bluetooth/core'
 import {ThemeProvider} from '~/modules/theme'
@@ -21,15 +22,17 @@ const RootStack = createStackNavigator<RootStackParamList>()
 
 function App() {
   return (
-    <RootStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <RootStack.Screen name="Controller" component={Controller} />
-      <RootStack.Group screenOptions={{presentation: 'modal'}}>
-        <RootStack.Screen name="Onboarding" component={OnboardingScreen} />
-      </RootStack.Group>
-    </RootStack.Navigator>
+    <View>
+      <RootStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <RootStack.Screen name="Controller" component={Controller} />
+        <RootStack.Group screenOptions={{presentation: 'modal'}}>
+          <RootStack.Screen name="Onboarding" component={OnboardingScreen} />
+        </RootStack.Group>
+      </RootStack.Navigator>
+    </View>
   )
 }
 

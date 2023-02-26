@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 
-import {StackScreenProps} from '@react-navigation/stack'
+import {type StackScreenProps} from '@react-navigation/stack'
 import {
   Button,
   Center,
@@ -17,7 +17,7 @@ import {RESULTS} from 'react-native-permissions'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 
 import {OnboardingStackParamList} from '.'
-import {useDiscoverPeripherals} from '~/modules/bluetooth/discovery'
+import {ScanningContext} from '~/modules/bluetooth/discovery'
 import {
   getRequestBtPermissionsFn,
   useGetBtPerms,
@@ -26,18 +26,21 @@ import {
 type Props = StackScreenProps<OnboardingStackParamList, 'Scan'>
 
 export default function ScanScreen({navigation}: Props) {
+  const {
+    peripheralsState: [peripherals],
+    scanningState: [isScanning],
+    reset,
+  } = useContext(ScanningContext)
   const [btPermStatus, recheckBtPerms] = useGetBtPerms()
-  const [isScanning, setIsScanning] = useState(true)
-  const {peripherals} = useDiscoverPeripherals({
-    onDiscoveryStop: () => {
-      setIsScanning(false)
-    },
-  })
+  const [navigated, setNavigated] = useState(false)
   const requestBtPermissionsFn = getRequestBtPermissionsFn()
 
-  Object.entries(peripherals).forEach(peripheralEntry => {
-    console.log(peripheralEntry[1].advertising.serviceUUIDs)
-  })
+  useEffect(() => {
+    if (peripherals.length > 0 && !navigated) {
+      navigation.replace('DeviceSelector')
+      setNavigated(true)
+    }
+  }, [peripherals, navigated, navigation])
 
   useEffect(() => {
     async function requestBtPermissions() {
@@ -64,8 +67,7 @@ export default function ScanScreen({navigation}: Props) {
       (btPermStatus === RESULTS.GRANTED || btPermStatus === RESULTS.UNAVAILABLE)
     ) {
       try {
-        console.log('starting scan')
-        scan(['1811'], 5, true)
+        scan(['1811'], 0.5, true)
       } catch (error) {
         console.error(error)
       }
@@ -73,54 +75,39 @@ export default function ScanScreen({navigation}: Props) {
   }, [btPermStatus, isScanning])
 
   function getContent() {
-    if (peripherals.length === 0) {
-      if (isScanning) {
-        return (
-          <Flex height="100%" justifyContent="center">
-            <VStack>
-              <Center>
-                <Spinner size="lg" />
-              </Center>
-            </VStack>
-          </Flex>
-        )
-      } else {
-        return (
-          <>
-            <Flex height="100%" justifyContent="center">
-              <Center>
-                <VStack alignItems="center" space="2">
-                  <Icon
-                    as={EntypoIcon}
-                    name="circle-with-cross"
-                    size="20"
-                    color="red.500"
-                  />
-                  <Heading>No devices were found.</Heading>
-                  <Text>Try moving closer.</Text>
-                </VStack>
-              </Center>
-            </Flex>
-            <Center
-              marginBottom="8"
-              marginTop="auto"
-              paddingX="8"
-              safeAreaBottom>
-              <Button
-                onPress={() => setIsScanning(true)}
-                size="lg"
-                width="100%">
-                Retry
-              </Button>
-            </Center>
-          </>
-        )
-      }
+    if (peripherals.length > 0) return null
+    if (isScanning) {
+      return (
+        <Flex height="100%" justifyContent="center">
+          <VStack alignItems="center" space="md">
+            <Spinner size="lg" />
+            <Heading>Looking for RGB Controllers...</Heading>
+          </VStack>
+        </Flex>
+      )
     } else {
       return (
-        <Flex height="100%" alignItems="center" justifyContent="center">
-          <Text>Found {peripherals.length} device(s)</Text>
-        </Flex>
+        <>
+          <Flex height="100%" justifyContent="center">
+            <Center>
+              <VStack alignItems="center" space="sm">
+                <Icon
+                  as={EntypoIcon}
+                  name="circle-with-cross"
+                  size="20"
+                  color="red.500"
+                />
+                <Heading>No RGB Controllers were found.</Heading>
+                <Text>Try moving closer.</Text>
+              </VStack>
+            </Center>
+          </Flex>
+          <Center marginBottom="8" marginTop="auto" paddingX="8" safeAreaBottom>
+            <Button onPress={() => reset()} size="lg" width="100%">
+              Retry
+            </Button>
+          </Center>
+        </>
       )
     }
   }

@@ -1,6 +1,12 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community', 'plugin:react/jsx-runtime', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    '@react-native-community',
+    'plugin:react/jsx-runtime',
+    'prettier',
+  ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   overrides: [

@@ -1,4 +1,4 @@
-import {StackScreenProps} from '@react-navigation/stack'
+import {type StackScreenProps} from '@react-navigation/stack'
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
   View,
 } from 'native-base'
 
-import {OnboardingStackParamList} from '.'
+import {type OnboardingStackParamList} from '.'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'ExplainPermissions'>
 
@@ -26,7 +26,7 @@ export default function ExplainPermissionsScreen({navigation}: Props) {
           <Box paddingX="8">
             <Heading marginBottom="4">Enable Bluetooth</Heading>
             <Text>
-              Please provide access to your device's bluetooth, which is
+              Please provide access to your device&apos;s bluetooth, which is
               required for connecting to the ConeRGB Controller.
             </Text>
           </Box>
