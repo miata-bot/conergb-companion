@@ -1,5 +1,3 @@
-import {useEffect, useState} from 'react'
-
 import {type StackScreenProps} from '@react-navigation/stack'
 import {
   Box,
@@ -14,7 +12,7 @@ import {
 import {RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
-import useGetBtPerms from '~/modules/bt/hooks/useGetBtPerms'
+import {useGetBtPerms} from '~/modules/bluetooth/permissions'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
 

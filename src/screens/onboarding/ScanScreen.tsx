@@ -2,11 +2,14 @@ import {useEffect} from 'react'
 
 import {StackScreenProps} from '@react-navigation/stack'
 import {Center, Flex, Spinner, VStack, useColorModeValue} from 'native-base'
+import {scan} from 'react-native-ble-manager'
 import {RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
-import {getRequestBtPermissionsFn} from '~/modules/bt'
-import useGetBtPerms from '~/modules/bt/hooks/useGetBtPerms'
+import {
+  getRequestBtPermissionsFn,
+  useGetBtPerms,
+} from '~/modules/bluetooth/permissions'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'Scan'>
 

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 
 import {type PermissionStatus} from 'react-native-permissions'
 
-import {getCheckBtPermissionsFn} from '..'
+import {getCheckBtPermissionsFn} from '../utils'
 
 export default function useGetBtPerms(): [
   PermissionStatus | undefined,

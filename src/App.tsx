@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 
+import {useBtService} from './modules/bluetooth/core'
 import {ThemeProvider} from '~/modules/theme'
 import Controller from '~/screens/controller'
 import OnboardingScreen from '~/screens/onboarding'
@@ -33,6 +34,7 @@ function App() {
 }
 
 export default function AppRoot() {
+  useBtService()
   const scheme = useColorScheme()
 
   return (
