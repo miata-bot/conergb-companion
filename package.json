@@ -8,7 +8,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prettier": "prettier --config \".prettierrc.js\" --ignore-path \".prettierignore\" -l  --write \"**/*.{json,md,scss,yaml,yml,js,jsx,tsx,ts}\""
+    "format": "prettier --config \".prettierrc.js\" --ignore-path \".prettierignore\" -l  --write \"**/*.{json,md,scss,yaml,yml,js,jsx,tsx,ts}\""
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.5",
