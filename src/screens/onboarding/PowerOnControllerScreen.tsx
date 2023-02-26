@@ -11,25 +11,16 @@ import {
   VStack,
   useColorModeValue,
 } from 'native-base'
-import {type PermissionStatus, RESULTS} from 'react-native-permissions'
+import {RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
-import {getCheckBtPermissionsFn} from '~/modules/bt'
+import useGetBtPerms from '~/modules/bt/hooks/useGetBtPerms'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
 
 export default function PowerOnControllerScreen({navigation}: Props) {
   const bgColor = useColorModeValue('light.50', 'dark.50')
-  const checkBtPermissionsFn = getCheckBtPermissionsFn()
-  const [btPermStatus, setBtPermStatus] = useState<PermissionStatus>()
-
-  useEffect(() => {
-    async function checkBtPermissions() {
-      const result = await checkBtPermissionsFn()
-      setBtPermStatus(result)
-    }
-    checkBtPermissions()
-  }, [checkBtPermissionsFn])
+  const [btPermStatus] = useGetBtPerms()
 
   function goToNextScreen() {
     if (

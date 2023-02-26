@@ -1,33 +1,24 @@
-import {useState} from 'react'
 import {useEffect} from 'react'
 
 import {StackScreenProps} from '@react-navigation/stack'
 import {Center, Flex, Spinner, VStack, useColorModeValue} from 'native-base'
-import {type PermissionStatus, RESULTS} from 'react-native-permissions'
+import {RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
-import {getCheckBtPermissionsFn, getRequestBtPermissionsFn} from '~/modules/bt'
+import {getRequestBtPermissionsFn} from '~/modules/bt'
+import useGetBtPerms from '~/modules/bt/hooks/useGetBtPerms'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'Scan'>
 
 export default function ScanScreen({navigation}: Props) {
-  const [btPermStatus, setBtPermStatus] = useState<PermissionStatus>()
   const bgColor = useColorModeValue('light.50', 'dark.50')
-  const checkBtPermissionsFn = getCheckBtPermissionsFn()
+  const [btPermStatus, recheckBtPerms] = useGetBtPerms()
   const requestBtPermissionsFn = getRequestBtPermissionsFn()
 
   useEffect(() => {
-    async function checkBtPermissions() {
-      const result = await checkBtPermissionsFn()
-      setBtPermStatus(result)
-    }
-    checkBtPermissions()
-  }, [checkBtPermissionsFn])
-
-  useEffect(() => {
     async function requestBtPermissions() {
-      const result = await requestBtPermissionsFn()
-      setBtPermStatus(result)
+      await requestBtPermissionsFn()
+      recheckBtPerms()
     }
 
     if (btPermStatus) {
@@ -41,7 +32,7 @@ export default function ScanScreen({navigation}: Props) {
         navigation.replace('BtError')
       }
     }
-  }, [btPermStatus, navigation, requestBtPermissionsFn])
+  }, [btPermStatus, navigation, recheckBtPerms, requestBtPermissionsFn])
 
   useEffect(() => {
     if (
