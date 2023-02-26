@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 
 import {StackScreenProps} from '@react-navigation/stack'
-import {Center, Flex, Spinner, VStack, useColorModeValue} from 'native-base'
+import {Center, Flex, Spinner, VStack} from 'native-base'
 import {scan} from 'react-native-ble-manager'
 import {RESULTS} from 'react-native-permissions'
 
@@ -10,11 +10,12 @@ import {
   getRequestBtPermissionsFn,
   useGetBtPerms,
 } from '~/modules/bluetooth/permissions'
+import {useBgColor} from '~/modules/theme'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'Scan'>
 
 export default function ScanScreen({navigation}: Props) {
-  const bgColor = useColorModeValue('light.50', 'dark.50')
+  const bgColor = useBgColor()
   const [btPermStatus, recheckBtPerms] = useGetBtPerms()
   const requestBtPermissionsFn = getRequestBtPermissionsFn()
 

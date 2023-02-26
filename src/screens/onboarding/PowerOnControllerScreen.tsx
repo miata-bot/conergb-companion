@@ -1,23 +1,15 @@
 import {type StackScreenProps} from '@react-navigation/stack'
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-  useColorModeValue,
-} from 'native-base'
+import {Box, Button, Center, Flex, Heading, Text, VStack} from 'native-base'
 import {RESULTS} from 'react-native-permissions'
 
 import {OnboardingStackParamList} from '.'
 import {useGetBtPerms} from '~/modules/bluetooth/permissions'
+import {useBgColor} from '~/modules/theme'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'PowerOnController'>
 
 export default function PowerOnControllerScreen({navigation}: Props) {
-  const bgColor = useColorModeValue('light.50', 'dark.50')
+  const bgColor = useBgColor()
   const [btPermStatus] = useGetBtPerms()
 
   function goToNextScreen() {

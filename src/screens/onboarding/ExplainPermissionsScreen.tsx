@@ -1,21 +1,13 @@
 import {StackScreenProps} from '@react-navigation/stack'
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-  useColorModeValue,
-} from 'native-base'
+import {Box, Button, Center, Flex, Heading, Text, VStack} from 'native-base'
 
 import {OnboardingStackParamList} from '.'
+import {useBgColor} from '~/modules/theme'
 
 type Props = StackScreenProps<OnboardingStackParamList, 'ExplainPermissions'>
 
 export default function ExplainPermissionsScreen({navigation}: Props) {
-  const bgColor = useColorModeValue('light.50', 'dark.50')
+  const bgColor = useBgColor()
 
   function goToNextScreen() {
     navigation.push('Scan')

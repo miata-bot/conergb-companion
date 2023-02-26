@@ -1,17 +1,10 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-  useColorModeValue,
-} from 'native-base'
+import {Box, Button, Center, Flex, Heading, Text, VStack} from 'native-base'
 import {openSettings} from 'react-native-permissions'
 
+import {useBgColor} from '~/modules/theme'
+
 export default function BtErrorScreen() {
-  const bgColor = useColorModeValue('light.50', 'dark.50')
+  const bgColor = useBgColor()
 
   async function handleOpenSettings() {
     await openSettings()

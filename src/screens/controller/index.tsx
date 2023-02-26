@@ -1,14 +1,15 @@
 import {useEffect} from 'react'
 
 import type {StackScreenProps} from '@react-navigation/stack'
-import {Flex, useColorModeValue} from 'native-base'
+import {Flex} from 'native-base'
 
 import type {RootStackParamList} from '~/App'
+import {useBgColor} from '~/modules/theme'
 
 type Props = StackScreenProps<RootStackParamList, 'Controller'>
 
 export default function Controller({navigation}: Props) {
-  const bgColor = useColorModeValue('light.50', 'dark.50')
+  const bgColor = useBgColor()
 
   useEffect(() => {
     navigation.replace('Onboarding')
